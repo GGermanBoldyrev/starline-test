@@ -14,19 +14,26 @@ class Teams
       {
             $this->params = $params;
             $this->checkParams();
+            $this->setTeamsCount();
       }
 
-      public function execute(): int
+      public function getTeamsCount(): int
+      {
+            return $this->teamsCount;
+      }
+
+      private function setTeamsCount(): void
       {
             if ($this->getParam('teams') < 0 || $this->getParam('teams') > self::UINT32_MAX) {
-                  throw new CliException("Количество команд должно быть целым числом от 0 до " . self::UINT32_MAX . ".");
+                  throw new CliException("Количество команд должно быть целым числом от 0 до "
+                        . self::UINT32_MAX . "." . PHP_EOL);
             }
-            return $this->getParam('teams');
+            $this->teamsCount = $this->getParam('teams');
       }
 
       private function checkParams(): void
       {
-            $this->ensureParamsExist('teams');
+            $this->ensureParamsExist('teams', 'uint32');
       }
 
       private function getParam(string $param): int|null
@@ -34,10 +41,10 @@ class Teams
             return $this->params[$param] ?? null;
       }
 
-      private function ensureParamsExist(string $param): void
+      private function ensureParamsExist(string $param, string $paramType): void
       {
             if (!isset($this->params[$param])) {
-                  throw new CliException("Обязательный параметр --<$param> отсутствует.");
+                  throw new CliException("Отсутствует обязательный параметр --$param=($paramType)." . PHP_EOL);
             }
       }
 }

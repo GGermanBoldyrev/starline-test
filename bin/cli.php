@@ -10,10 +10,12 @@ use src\exceptions\CliException;
 try {
       // Парсим аргументы командной строки
       $params = getopt("", ["teams:"]);
+      print_r($params);
       // Создаем новый класс Teams, он проверяет переданные аргументы
       $teamsClass = new Teams($params);
       // $teamsCount(int) - Количество команд
-      $teamsCount = $teamsClass->execute();
+      $teamsCount = $teamsClass->getTeamsCount();
+      var_dump($teamsCount);
 
 } catch (CliException $e) {
       echo "Error: " . $e->getMessage();
