@@ -3,8 +3,9 @@
 namespace src\cli;
 
 use src\exceptions\CliException;
+use src\interfaces\CliInterface;
 
-class Teams
+class Teams implements CliInterface
 {
       const UINT32_MAX = 4294967295;
       private array $params;
@@ -14,15 +15,15 @@ class Teams
       {
             $this->params = $params;
             $this->checkParams();
-            $this->setTeamsCount();
+            $this->setCount();
       }
 
-      public function getTeamsCount(): int
+      public function getCount(): int
       {
             return $this->teamsCount;
       }
 
-      private function setTeamsCount(): void
+      private function setCount(): void
       {
             if ($this->getParam('teams') < 0 || $this->getParam('teams') > self::UINT32_MAX) {
                   throw new CliException("Количество команд должно быть целым числом от 0 до "

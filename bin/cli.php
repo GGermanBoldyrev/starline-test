@@ -3,20 +3,24 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use src\cli\Teams;
+use src\core\GridGenerator;
 use src\exceptions\CliException;
 
 // TODO: Вынести все в класс Application
+// TODO: Выводить картинки в отдельную папку (output)
+// TODO: Выводить в одной картинке по 4 команды
+// TODO: Подумать над нечетными значениями
 
 try {
       // Парсим аргументы командной строки
       $params = getopt("", ["teams:"]);
-      print_r($params);
       // Создаем новый класс Teams, он проверяет переданные аргументы
       $teamsClass = new Teams($params);
       // $teamsCount(int) - Количество команд
-      $teamsCount = $teamsClass->getTeamsCount();
-      var_dump($teamsCount);
-
+      $teamsCount = $teamsClass->getCount();
+      // GNU Data class
+      $GNUData = new GridGenerator($teamsCount);
+      $GNUData->resolve();
 } catch (CliException $e) {
       echo "Error: " . $e->getMessage();
 }
