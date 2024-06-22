@@ -19,8 +19,9 @@ try {
       // $teamsCount(int) - Количество команд
       $teamsCount = $teamsClass->getCount();
       // GNU Data class
-      $GNUData = new GridGenerator($teamsCount);
-      $GNUData->resolve();
+      $gridGenerator = new GridGenerator($teamsCount);
+      $gridGenerator->drawGrid();
+      $gridGenerator->saveImage('tournament_grid.png');
 } catch (CliException $e) {
       echo "Error: " . $e->getMessage();
 }

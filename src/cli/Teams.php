@@ -3,9 +3,8 @@
 namespace src\cli;
 
 use src\exceptions\CliException;
-use src\interfaces\CliInterface;
 
-class Teams implements CliInterface
+class Teams
 {
       const UINT32_MAX = 4294967295;
       private array $params;
