@@ -211,6 +211,9 @@ class GridGenerator
 
       public function saveImage(string $filename): void
       {
-            imagepng($this->image, $filename);
+            if (!file_exists('output')) {
+                  mkdir('output', 0777, true);
+            }
+            imagepng($this->image, 'output/' . $filename);
       }
 }
