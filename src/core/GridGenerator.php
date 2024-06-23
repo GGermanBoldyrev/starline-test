@@ -36,7 +36,7 @@ class GridGenerator
         // Задаем базовые цвета
         $this->blackColor = imagecolorallocate($this->image, 0, 0, 0);
         $this->whiteColor = imagecolorallocate($this->image, 255, 255, 255);
-        $this->matchBackgroundColor = imagecolorallocate($this->image, 51, 255, 51);
+        $this->matchBackgroundColor = imagecolorallocate($this->image, 120, 255, 120);
 
         // Задаем цвет фона основному изображению
         imagefill($this->image, 0, 0, $this->whiteColor);
