@@ -7,22 +7,24 @@ use src\exceptions\CliException;
 
 class Application
 {
-      private Teams $teams;
-      private GridGenerator $gridGenerator;
+    private array $params;
+    private Teams $teams;
+    private GridGenerator $gridGenerator;
 
-      public function __construct(array $params)
-      {
-            $this->teams = new Teams($params);
-            $this->gridGenerator = new GridGenerator($this->teams->getCount());
-      }
+    public function __construct(array $params)
+    {
+        $this->params = $params;
+    }
 
-      public function run(): void
-      {
-            try {
-                  $this->gridGenerator->drawGrid();
-                  $this->gridGenerator->saveImage('tournament_grid.png');
-            } catch (CliException $e) {
-                  echo "Error: " . $e->getMessage();
-            }
-      }
+    public function run(): void
+    {
+        try {
+            $this->teams = new Teams($this->params);
+        } catch (CliException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        $this->gridGenerator = new GridGenerator($this->teams->getCount());
+        $this->gridGenerator->drawGrid();
+        $this->gridGenerator->saveImage('tournament_grid.png');
+    }
 }

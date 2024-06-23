@@ -11,5 +11,7 @@
       "email": "boldyrev_german@mail.ru"
     }
   ],
-  "require": {}
+  "require": {
+    "ext-gd": "*"
+  }
 }

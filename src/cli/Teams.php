@@ -10,7 +10,10 @@ class Teams
       private array $params;
       private int $teamsCount;
 
-      public function __construct(array $params)
+    /**
+     * @throws CliException
+     */
+    public function __construct(array $params)
       {
             $this->params = $params;
             $this->checkParams();
@@ -22,7 +25,10 @@ class Teams
             return $this->teamsCount;
       }
 
-      private function setCount(): void
+    /**
+     * @throws CliException
+     */
+    private function setCount(): void
       {
             if ($this->getParam('teams') < 0 || $this->getParam('teams') > self::UINT32_MAX) {
                   throw new CliException("Количество команд должно быть целым числом от 0 до "
@@ -31,7 +37,10 @@ class Teams
             $this->teamsCount = $this->getParam('teams');
       }
 
-      private function checkParams(): void
+    /**
+     * @throws CliException
+     */
+    private function checkParams(): void
       {
             $this->ensureParamsExist('teams', 'uint32');
       }
@@ -41,7 +50,10 @@ class Teams
             return $this->params[$param] ?? null;
       }
 
-      private function ensureParamsExist(string $param, string $paramType): void
+    /**
+     * @throws CliException
+     */
+    private function ensureParamsExist(string $param, string $paramType): void
       {
             if (!isset($this->params[$param])) {
                   throw new CliException("Отсутствует обязательный параметр --$param=($paramType)." . PHP_EOL);

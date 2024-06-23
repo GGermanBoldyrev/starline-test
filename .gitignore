@@ -2,3 +2,4 @@
 vendor
 composer.lock
 output
+.DS_Store
